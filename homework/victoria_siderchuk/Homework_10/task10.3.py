@@ -10,7 +10,7 @@ def select_operation(func):
         elif first < second:
             return func(first, second, '/')
 
-    return(wrapper)
+    return (wrapper)
 
 
 @select_operation
