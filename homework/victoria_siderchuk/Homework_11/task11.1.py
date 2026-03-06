@@ -23,19 +23,19 @@ books = [first_book, second_book, third_book, fourth_book, fifth_book]
 for book in books:
     if book.is_reserved:
         print(
-    f'Title: {book.title}, '
-    f'Author: {book.author}, '
-    f'Number of pages: {book.page_number}, '
-    f'Material: {book.page_material}, '
-    f'Reserved'
-)
+            f'Title: {book.title}, '
+            f'Author: {book.author}, '
+            f'Number of pages: {book.page_number}, '
+            f'Material: {book.page_material}, '
+            f'Reserved'
+        )
     else:
         print(
-    f'Title: {book.title}, '
-    f'Author: {book.author}, '
-    f'Number of pages: {book.page_number}, '
-    f'Material: {book.page_material}'
-)
+            f'Title: {book.title}, '
+            f'Author: {book.author}, '
+            f'Number of pages: {book.page_number}, '
+            f'Material: {book.page_material}'
+        )
 
 
 class SchoolBook(Book):
@@ -45,9 +45,10 @@ class SchoolBook(Book):
         self.school_group = school_group
         self.has_tasks = has_tasks
 
+
 school_book1 = SchoolBook('Algebra', 'Ivanov', 50, 1, 'Math', '1A', True)
 school_book1.is_reserved = True
-school_book2 = SchoolBook('Roman Empire', 'Sokolov', 32,2, 'History', '2A', False)
+school_book2 = SchoolBook('Roman Empire', 'Sokolov', 32, 2, 'History', '2A', False)
 school_book3 = SchoolBook('Africa', 'Johnson', 21, 3, 'Geography', '3A', False)
 
 school_books = [school_book1, school_book2, school_book3]
@@ -56,16 +57,16 @@ school_books = [school_book1, school_book2, school_book3]
 for school_book in school_books:
     if school_book.is_reserved:
         print(
-    f'Title: {school_book.title}, '
-    f'Author: {school_book.author}, '
-    f'Number of pages: {school_book.page_number}, '
-    f'Subject: {school_book.subject}, '
-    f'Reserved'
-)
+            f'Title: {school_book.title}, '
+            f'Author: {school_book.author}, '
+            f'Number of pages: {school_book.page_number}, '
+            f'Subject: {school_book.subject}, '
+            f'Reserved'
+        )
     else:
         print(
-    f'Title: {school_book.title}, '
-    f'Author: {school_book.author}, '
-    f'Number of pages: {school_book.page_number}, '
-    f'Subject: {school_book.subject}'
-)
+            f'Title: {school_book.title}, '
+            f'Author: {school_book.author}, '
+            f'Number of pages: {school_book.page_number}, '
+            f'Subject: {school_book.subject}'
+        )
