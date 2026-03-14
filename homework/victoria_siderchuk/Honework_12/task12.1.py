@@ -64,10 +64,8 @@ class Bouquet:
     def sort_by_price(self):
         return sorted(self.flowers, key=lambda x: x.price)
 
-
     def sort_by_length(self):
         return sorted(self.flowers, key=lambda x: x.length)
-
 
     def search_by_color(self, color):
         colored_flowers = []
@@ -79,7 +77,7 @@ class Bouquet:
 
 rose1 = Rose('Rose', 3, 1, 'red', 20, 120)
 rose2 = Rose('Rose', 3, 2, 'white', 80, 350)
-rose3 = Rose('Rose', 4, 3, 'yellow',39, 30 )
+rose3 = Rose('Rose', 4, 3, 'yellow', 39, 30)
 
 lily1 = Lily('Lily', 7, 5, 'white', 50, 150)
 lily2 = Lily('Lily', 10, 8, 'orange', 70, 140)
