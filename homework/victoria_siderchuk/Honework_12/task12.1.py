@@ -11,10 +11,6 @@ class Flower:
         self.price = price
 
 
-class Rose(Flower):
-    def __init__(self, name, lifetime, freshness, color, length, price):
-        super().__init__(name, lifetime, freshness, color, length, price)
-
     def __repr__(self):
         r = {
             'name': self.name,
@@ -25,22 +21,16 @@ class Rose(Flower):
             'price': self.price
         }
         return json.dumps(r)
+
+
+class Rose(Flower):
+    def __init__(self, name, lifetime, freshness, color, length, price):
+        super().__init__(name, lifetime, freshness, color, length, price)
 
 
 class Lily(Flower):
     def __init__(self, name, lifetime, freshness, color, length, price):
         super().__init__(name, lifetime, freshness, color, length, price)
-
-    def __repr__(self):
-        r = {
-            'name': self.name,
-            'lifetime': self.lifetime,
-            'freshness': self.freshness,
-            'color': self.color,
-            'length': self.length,
-            'price': self.price
-        }
-        return json.dumps(r)
 
 
 class Bouquet:
