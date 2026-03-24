@@ -1,14 +1,14 @@
-INSERT INTO students (name, second_name, group_id) VALUES ('Bob', 'White', 4855)
+INSERT INTO students (name, second_name, group_id) VALUES ('Bob', 'White', NULL)
 
 SELECT id, name FROM students WHERE name = 'Bob'
 
-INSERT INTO books (title, taken_by_student_id) VALUES ('Hamlet', 22516), ('The Hobbit', 22516)
+INSERT INTO books (title, taken_by_student_id) VALUES ('Hamlet', 22524), ('The Hobbit', 22524)
 
 INSERT INTO `groups` (title, start_date, end_date) VALUES ('Grade 10A', 2026-01-01, 2026-12-31)
 
 SELECT id, title FROM `groups` WHERE title = 'Grade 10A'
 
-UPDATE students SET group_id = 22201 WHERE id = 22516
+UPDATE students SET group_id = 22201 WHERE id = 22524
 
 INSERT INTO subjects (title) VALUES ('Biology'), ('Foreign Languages')
 
@@ -18,11 +18,11 @@ INSERT INTO lessons (title, subject_id) VALUES ('Animals', 14245), ('Flowers', 1
 
 SELECT id, title FROM lessons WHERE title = 'Animals' OR title = 'Flowers' OR title = 'English' OR title = 'French'
 
-INSERT INTO marks (value, lesson_id, student_id) VALUES (5, 75619, 22516), (4, 75620, 22516), (3, 75621, 22516), (2, 75622, 22516)
+INSERT INTO marks (value, lesson_id, student_id) VALUES (5, 75619, 22524), (4, 75620, 22524), (3, 75621, 22524), (2, 75622, 22524)
 
-SELECT * FROM marks WHERE student_id = 22516
+SELECT * FROM marks WHERE student_id = 22524
 
-SELECT * FROM books WHERE taken_by_student_id = 22516
+SELECT * FROM books WHERE taken_by_student_id = 22524
 
 SELECT s.id, s.name AS 'First Name', s.second_name AS 'Second Name', g.title AS 'Group Title', b.title AS 'Book Title', m.value AS 'Mark', l.title AS 'Lesson', sb.title AS 'Subject'
 FROM students s
@@ -31,4 +31,4 @@ JOIN books b ON s.id = b.taken_by_student_id
 JOIN marks m ON s.id = m.student_id
 JOIN lessons l ON l.id = m.lesson_id
 JOIN subjects sb ON sb.id = l.subject_id
-WHERE s.id = 22516
+WHERE s.id = 22524
