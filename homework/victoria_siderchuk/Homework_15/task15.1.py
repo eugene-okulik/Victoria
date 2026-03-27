@@ -78,15 +78,15 @@ cursor.execute("SELECT * FROM books WHERE taken_by_student_id = %s", (student_id
 print(cursor.fetchall())
 
 query = '''
-SELECT 
-    s.id, 
-    s.name AS 'First Name', 
-    s.second_name AS 'Second Name', 
-    g.title AS 'Group Title', 
-    b.title AS 'Book Title', 
-    m.value AS 'Mark', 
-    l.title AS 'Lesson', 
-    sb.title AS 'Subject'
+SELECT
+    s.id,
+    s.name AS 'First Name',
+    s.second_name AS 'Second Name',
+    g.title AS 'Group Title',
+    b.title AS 'Book Title',
+    m.value AS 'Mark',
+    l.title AS 'Lesson',
+    sb.title AS 'Subject
 FROM students s
 JOIN `groups` g ON s.group_id = g.id
 JOIN books b ON s.id = b.taken_by_student_id
