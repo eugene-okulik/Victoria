@@ -39,12 +39,12 @@ subjects = [
     ('Biology',),
     ('Foreign Languages',)
 ]
-cursor.executemany("INSERT INTO subjects (title) VALUES (%s)", subjects)
-cursor.execute("SELECT * FROM subjects ORDER BY id DESC LIMIT 2")
-all_subjects = (cursor.fetchall())
-print(all_subjects)
-foreign_id, biology_id = [row['id'] for row in all_subjects]
-print(foreign_id, biology_id)
+subject_ids = []
+for subject in subjects:
+    cursor.execute("INSERT INTO subjects (title) VALUES (%s)", subject)
+    subject_ids.append(cursor.lastrowid)
+biology_id, foreign_id = subject_ids
+print(biology_id, foreign_id)
 
 
 lessons = [
@@ -53,12 +53,12 @@ lessons = [
     ('English', foreign_id),
     ('French', foreign_id)
 ]
-cursor.executemany("INSERT INTO lessons (title, subject_id) VALUES (%s, %s)", lessons)
-cursor.execute("SELECT * FROM lessons ORDER BY id DESC LIMIT 4")
-all_lessons = (cursor.fetchall())
-print(all_lessons)
-french_id, english_id, flowers_id, animals_id = [row['id'] for row in all_lessons]
-print(french_id, english_id, flowers_id, animals_id)
+lesson_ids = []
+for lesson in lessons:
+    cursor.execute("INSERT INTO lessons (title, subject_id) VALUES (%s, %s)", lesson)
+    lesson_ids.append(cursor.lastrowid)
+animals_id, flowers_id, english_id, french_id = lesson_ids
+print(animals_id, flowers_id, english_id, french_id)
 
 
 marks = [
@@ -86,7 +86,7 @@ SELECT
     b.title AS 'Book Title',
     m.value AS 'Mark',
     l.title AS 'Lesson',
-    sb.title AS 'Subject
+    sb.title AS 'Subject'
 FROM students s
 JOIN `groups` g ON s.group_id = g.id
 JOIN books b ON s.id = b.taken_by_student_id
@@ -98,5 +98,5 @@ WHERE s.id = %s
 cursor.execute(query, (student_id,))
 print(cursor.fetchall())
 
-
+db.commit()
 db.close()
