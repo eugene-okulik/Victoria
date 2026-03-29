@@ -29,13 +29,13 @@ db = mysql.connect(
 
 cursor = db.cursor(dictionary=True)
 query = '''
-SELECT 
-    s.name AS 'name', 
-    s.second_name AS 'second_name', 
-    g.title AS 'group_title', 
-    b.title AS 'book_title', 
-    m.value AS 'mark_value', 
-    l.title AS 'lesson_title', 
+SELECT
+    s.name AS 'name',
+    s.second_name AS 'second_name',
+    g.title AS 'group_title',
+    b.title AS 'book_title',
+    m.value AS 'mark_value',
+    l.title AS 'lesson_title',
     sb.title AS 'subject_title'
 FROM students s
 JOIN `groups` g ON s.group_id = g.id
@@ -53,7 +53,7 @@ with open(eugene_path, newline='') as csv_file:
     file_data = csv.DictReader(csv_file)
     data = []
     for row in file_data:
-            data.append(row)
+        data.append(row)
 
 
 missing_data = []
