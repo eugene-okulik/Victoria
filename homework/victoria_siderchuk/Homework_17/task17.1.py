@@ -36,8 +36,8 @@ def main(path, text):
     if not os.path.exists(base_path):
         print(f'{base_path} does not exist')
         return
-    if text is None or text =='':
-        print(f'Text shouldn\'t be empty')
+    if text is None or text == '':
+        print("Text shouldn't be empty")
         return
     if os.path.isfile(base_path):
         files = [os.path.basename(base_path)]
@@ -56,10 +56,9 @@ def main(path, text):
 
                 full_lines[-1] += line
 
-        relevant_lines = [l for l in full_lines if text.lower() in l.lower().split()]
+        relevant_lines = [line for line in full_lines if text.lower() in line.lower().split()]
         if len(relevant_lines) > 0:
             print_error(file, relevant_lines, text)
-
 
 
 if __name__ == '__main__':
