@@ -16,7 +16,7 @@ def new_object():
     }
     headers = {'Content-Type': 'application/json'}
     response = requests.post("http://objapi.course.qa-practice.com/object", json=body, headers=headers)
-    assert response.status_code == 200, f'Status code is incorrect'
+    assert response.status_code == 200, 'Status code is incorrect'
     return response.json()['id']
 
 
