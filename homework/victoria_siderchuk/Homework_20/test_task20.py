@@ -5,13 +5,14 @@ BASE_URL = "http://objapi.course.qa-practice.com"
 OBJECT_ENDPOINT = f"{BASE_URL}/object"
 
 
-@pytest.fixture(scope = 'session')
+@pytest.fixture(scope='session')
 def session_start_complete():
     print("\nStart testing")
     yield
     print("\nTesting completed")
 
-@pytest.fixture(scope = 'function')
+
+@pytest.fixture(scope='function')
 def before_after_each_test():
     print("\nBefore test")
     yield
@@ -49,6 +50,7 @@ def test_create_object(session_start_complete, before_after_each_test, name, col
     created_object_id = created_object['id']
     requests.delete(f'{OBJECT_ENDPOINT}/{created_object_id}')
 
+
 @pytest.mark.critical
 def test_get_all_objects(before_after_each_test):
     response = requests.get(OBJECT_ENDPOINT)
@@ -75,6 +77,7 @@ def test_put_object(new_object_id, before_after_each_test):
     assert test_object['name'] == 'Door_1'
     assert test_object['data']['color'] == 'black'
     assert test_object['data']['size'] == 'small'
+
 
 @pytest.mark.medium
 def test_patch_object(new_object_id, before_after_each_test):
