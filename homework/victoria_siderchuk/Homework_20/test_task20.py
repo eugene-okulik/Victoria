@@ -31,6 +31,16 @@ def new_object_id():
     requests.delete(f'{OBJECT_ENDPOINT}/{object_id}')
 
 
+@pytest.fixture()
+def object_to_be_deleted():
+    body = {
+        "name": "Door To Delete",
+        "data": {}
+    }
+    response = requests.post(OBJECT_ENDPOINT, json=body)
+    return response.json()['id']
+
+
 @pytest.mark.parametrize('name, color, size', [
     ('DOOR1', '', ''),
     ('door 2', 'PINK', 'large'),
@@ -94,10 +104,8 @@ def test_patch_object(new_object_id, before_after_each_test):
     assert test_object['data']['size'] == 'medium'
 
 
-def test_delete_object(before_after_each_test):
-    body = {"name": "To Delete", "data": {}}
-    object_id = requests.post(OBJECT_ENDPOINT, json=body).json()['id']
-    delete_response = requests.delete(f'{OBJECT_ENDPOINT}/{object_id}')
+def test_delete_object(object_to_be_deleted, before_after_each_test):
+    delete_response = requests.delete(f'{OBJECT_ENDPOINT}/{object_to_be_deleted}')
     assert delete_response.status_code == 200
-    get_check_deletion = requests.get(f'{OBJECT_ENDPOINT}/{object_id}')
+    get_check_deletion = requests.get(f'{OBJECT_ENDPOINT}/{object_to_be_deleted}')
     assert get_check_deletion.status_code == 404
