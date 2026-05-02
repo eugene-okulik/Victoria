@@ -1,5 +1,6 @@
 import requests
 import pytest
+import allure
 
 BASE_URL = "http://objapi.course.qa-practice.com"
 OBJECT_ENDPOINT = f"{BASE_URL}/object"
@@ -41,32 +42,46 @@ def object_to_be_deleted():
     return response.json()['id']
 
 
+@allure.feature('Test Objects')
+@allure.story('Manipulating Objects')
+@allure.title('Create object')
 @pytest.mark.parametrize('name, color, size', [
     ('DOOR1', '', ''),
     ('door 2', 'PINK', 'large'),
     ('door_301!', 'blue', 'SMALL')
 ])
 def test_create_object(session_start_complete, before_after_each_test, name, color, size):
-    body = {
-        "name": name,
-        "data": {"color": color, "size": size}
-    }
-    create_response = requests.post(OBJECT_ENDPOINT, json=body)
-    assert create_response.status_code == 200
-    created_object = create_response.json()
-    assert created_object['name'] == name
-    assert created_object['data']['color'] == color
-    assert created_object['data']['size'] == size
-    created_object_id = created_object['id']
-    requests.delete(f'{OBJECT_ENDPOINT}/{created_object_id}')
+    with allure.step('Prepare test data'):
+        body = {
+            "name": name,
+            "data": {"color": color, "size": size}
+        }
+    with allure.step('Run request to create object'):
+        create_response = requests.post(OBJECT_ENDPOINT, json=body)
+    with allure.step('Check response status code'):
+        assert create_response.status_code == 200
+    with allure.step('Check response body'):
+        created_object = create_response.json()
+        assert created_object['name'] == name
+        assert created_object['data']['color'] == color
+        assert created_object['data']['size'] == size
+        created_object_id = created_object['id']
+    with allure.step('Delete the created object'):
+        requests.delete(f'{OBJECT_ENDPOINT}/{created_object_id}')
 
 
+@allure.feature('Test Objects')
+@allure.story('Getting Objects Info')
+@allure.title('Get all existent objects')
 @pytest.mark.critical
 def test_get_all_objects(before_after_each_test):
     response = requests.get(OBJECT_ENDPOINT)
     assert response.status_code == 200
 
 
+@allure.feature('Test Objects')
+@allure.story('Getting Objects Info')
+@allure.title('Get one specific object')
 def test_get_single_object(new_object_id, before_after_each_test):
     response = requests.get(f'{OBJECT_ENDPOINT}/{new_object_id}')
     assert response.status_code == 200
@@ -76,6 +91,9 @@ def test_get_single_object(new_object_id, before_after_each_test):
     assert 'data' in test_object
 
 
+@allure.feature('Test Objects')
+@allure.story('Manipulating Objects')
+@allure.title('Update object data')
 def test_put_object(new_object_id, before_after_each_test):
     body = {
         "name": "Door_1",
@@ -89,21 +107,31 @@ def test_put_object(new_object_id, before_after_each_test):
     assert test_object['data']['size'] == 'small'
 
 
+@allure.feature('Test Objects')
+@allure.story('Manipulating Objects')
+@allure.title('Update object data partially')
 @pytest.mark.medium
 def test_patch_object(new_object_id, before_after_each_test):
-    body = {
-        "name": "Door_2",
-        "data": {"color": "green"}
-    }
-    patch_response = requests.patch(f'{OBJECT_ENDPOINT}/{new_object_id}', json=body)
-    assert patch_response.status_code == 200
+    with allure.step('Prepare test data'):
+        body = {
+            "name": "Door_2",
+            "data": {"color": "green"}
+        }
+    with allure.step('Run request to update object partially'):
+        patch_response = requests.patch(f'{OBJECT_ENDPOINT}/{new_object_id}', json=body)
+    with allure.step('Check response status code'):
+        assert patch_response.status_code == 200
     test_object = requests.get(f'{OBJECT_ENDPOINT}/{new_object_id}').json()
     print(test_object)
-    assert test_object['name'] == 'Door_2'
-    assert test_object['data']['color'] == 'green'
-    assert test_object['data']['size'] == 'medium'
+    with allure.step('Check response body. Size should keep the old value.'):
+        assert test_object['name'] == 'Door_2'
+        assert test_object['data']['color'] == 'green'
+        assert test_object['data']['size'] == 'medium'
 
 
+@allure.feature('Test Objects')
+@allure.story('Manipulating Objects')
+@allure.title('Delete object')
 def test_delete_object(object_to_be_deleted, before_after_each_test):
     delete_response = requests.delete(f'{OBJECT_ENDPOINT}/{object_to_be_deleted}')
     assert delete_response.status_code == 200
