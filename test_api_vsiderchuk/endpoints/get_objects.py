@@ -9,11 +9,10 @@ class GetObjects(Endpoint):
         headers = headers if headers else self.headers
         self.response = requests.get(
             f'{self.url}/object',
-            headers = headers
+            headers=headers
         )
         self.json = self.response.json()
         return self.response
-
 
     @allure.step('Check that objects list is not empty')
     def check_objects_list_is_not_empty(self):

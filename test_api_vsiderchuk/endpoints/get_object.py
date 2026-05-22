@@ -9,7 +9,7 @@ class GetObject(Endpoint):
         headers = headers if headers else self.headers
         self.response = requests.get(
             f'{self.url}/object/{object_id}',
-            headers = headers
+            headers=headers
         )
         if self.response.status_code == 200:
             self.json = self.response.json()
