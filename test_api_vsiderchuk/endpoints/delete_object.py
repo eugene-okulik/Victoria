@@ -1,0 +1,12 @@
+import requests
+import allure
+from endpoints.endpoint import Endpoint
+
+
+class DeleteObject(Endpoint):
+    @allure.step('Delete an object')
+    def delete_object(self, object_id):
+        self.response = requests.delete(
+            f'{self.url}/object/{object_id}'
+        )
+        return self.response
