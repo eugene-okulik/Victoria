@@ -1,0 +1,6 @@
+item_price_loc = ('.oe_currency_value')
+sort_by_dropdown_loc = ('.o_sortby_dropdown .dropdown-toggle')
+sort_by_price_asc_loc = ('.dropdown-menu a[href="/shop?order=list_price+asc&category=1"]')
+list_view_button_loc = ('.o_wsale_apply_list')
+active_list_view_button_loc = ('.o_wsale_apply_list.active')
+customizable_desk_card =('[content="Customizable Desk"]')

@@ -1,0 +1,6 @@
+add_to_cart_loc = ('#add_to_cart')
+item_title_loc = ('h1')
+item_breadcrumbs_loc = ('.breadcrumb')
+minus_button_loc = ('.fa-minus')
+plus_button_loc = ('.fa-plus')
+quantity_input_loc = ('.quantity')
