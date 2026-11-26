@@ -8,9 +8,11 @@ from pages.category_page import Category
 def cart_page(page):
     return Cart(page)
 
+
 @pytest.fixture()
 def item_page(page):
     return Item(page)
+
 
 @pytest.fixture()
 def category_page(page):
